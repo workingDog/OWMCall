@@ -1,6 +1,6 @@
-# SwiftUI OpenWeather Current Weather Data API library
+# Swift OpenWeather Current Weather Data API library
 
-**OWMCall** is a small Swift library to connect to the [OpenWeather Current Weather Data API](https://openweathermap.org/api#current) and retrieve the chosen weather data. Made easy to use with SwiftUI.
+**OWMCall** is a small Swift library to connect to the [OpenWeather Current Weather Data API](https://openweathermap.org/api#current) and retrieve the chosen weather data. Made easy to use with **SwiftUI**.
 
 Provides for current data through a single function call.
 
