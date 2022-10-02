@@ -10,7 +10,7 @@ import Foundation
 // info from: https://openweathermap.org/current
 
 // MARK: - OWMResponse
-public struct OWMResponse: Identifiable, Codable {
+public struct OWMResponse: Identifiable, Decodable {
     public let coord: Coord
     public let weather: [Weather]?
     public let base: String
@@ -66,7 +66,7 @@ public struct OWMResponse: Identifiable, Codable {
 }
 
 // MARK: - Clouds
-public struct Clouds: Codable {
+public struct Clouds: Decodable {
     public let all: Int
     public init() {
         self.all = 0
@@ -74,7 +74,7 @@ public struct Clouds: Codable {
 }
 
 // MARK: - Coord
-public struct Coord: Codable {
+public struct Coord: Decodable {
     public let lon, lat: Double
     public init(lon: Double = 0.0, lat: Double = 0.0) {
         self.lon = lon
@@ -83,7 +83,7 @@ public struct Coord: Codable {
 }
 
 // MARK: - Main
-public struct Main: Codable {
+public struct Main: Decodable {
     public let temp, feelsLike, tempMin, tempMax: Double
     public let pressure, humidity: Int?
     public let seaLevel, grndLevel: Int?
@@ -110,7 +110,7 @@ public struct Main: Codable {
 }
 
 // MARK: - Sys
-public struct Sys: Codable {
+public struct Sys: Decodable {
     public let type, id: Int
     public let country: String
     public let sunrise, sunset: Int
@@ -125,7 +125,7 @@ public struct Sys: Codable {
 }
 
 // MARK: - Weather
-public struct Weather: Identifiable, Codable {
+public struct Weather: Identifiable, Decodable {
     public let id: Int
     public let main, weatherDescription, icon: String
     
@@ -180,7 +180,7 @@ public struct Weather: Identifiable, Codable {
 }
 
 // MARK: - Wind
-public struct Wind: Codable {
+public struct Wind: Decodable {
     public let speed: Double?
     public let deg: Int?
     public let gust: Double?
@@ -194,7 +194,7 @@ public struct Wind: Codable {
 }
 
 // MARK: - Rain
-public struct Rain: Codable {
+public struct Rain: Decodable {
     public let the1H: Double?
     public let the3H: Double?
     
@@ -221,7 +221,7 @@ public struct Rain: Codable {
 }
 
 // MARK: - Snow
-public struct Snow: Codable {
+public struct Snow: Decodable {
     public let the1H: Double?
     public let the3H: Double?
     
