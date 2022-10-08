@@ -37,7 +37,7 @@ public class OWMClient {
     let sessionManager: URLSession
     
     let mediaType = "application/json; charset=utf-8"
-    let oneCallURL = "https://api.openweathermap.org/data/2.5/weather"
+    let weatherCallURL = "https://api.openweathermap.org/data/2.5/weather"
     
     public init(apiKey: String) {
         self.apiKey = "appid=" + apiKey
@@ -58,7 +58,7 @@ public class OWMClient {
      */
     public func fetchThisAsync<T: Decodable>(param: String, options: OWMOptionsProtocol) async throws -> T {
 
-        guard let url = URL(string: "\(oneCallURL)?\(param)\(options.toParamString())&\(apiKey)") else {
+        guard let url = URL(string: "\(weatherCallURL)?\(param)\(options.toParamString())&\(apiKey)") else {
             throw APIError.apiError(reason: "bad URL")
         }
         var request = URLRequest(url: url)

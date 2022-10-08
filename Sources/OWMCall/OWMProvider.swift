@@ -14,7 +14,7 @@ import SwiftUI
  */
 open class OWMProvider {
     
-    private let client: OWMClient
+    public let client: OWMClient
     
     public init(apiKey: String) {
         self.client = OWMClient(apiKey: apiKey)
