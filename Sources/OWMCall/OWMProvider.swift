@@ -22,13 +22,20 @@ open class OWMProvider {
     
     /// get the weather at the given location with the given options, results pass back through the weather binding
     open func getWeather(lat: Double, lon: Double, weather: Binding<OWMResponse>, options: OWMOptionsProtocol) {
-        Task {
+        
+        @Sendable
+        func updateWith(_ results: OWMResponse) {
+            weather.wrappedValue = results
+        }
+        
+        Task { @MainActor in
             if let results: OWMResponse = await getWeather(lat: lat, lon: lon, options: options) {
-                weather.wrappedValue = results
+              //  weather.wrappedValue = results
+                updateWith(results)
             }
         }
     }
-    
+
     /// get the weather at the given location with the given options, with async
     open func getWeather(lat: Double, lon: Double, options: OWMOptionsProtocol) async -> OWMResponse? {
         do {
