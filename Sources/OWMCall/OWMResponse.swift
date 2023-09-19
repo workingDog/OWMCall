@@ -11,8 +11,6 @@ import Foundation
 
 // MARK: - OWMResponse
 public struct OWMResponse: Identifiable, Decodable {
-    public let id = UUID()
-    
     public let coord: Coord
     public let weather: [Weather]?
     public let base: String
@@ -25,14 +23,8 @@ public struct OWMResponse: Identifiable, Decodable {
     public let dt: Int
     public let sys: Sys?
     public let timezone, cod: Int
-    public let name: String?
-    public var cityId: Int?
-    
-    enum CodingKeys: String, CodingKey {
-        case coord, weather, base, main, visibility, wind, rain, snow
-        case clouds, dt, sys, timezone, cod, name
-        case cityId = "id"
-    }
+    public let name: String
+    public let id: Int
     
     
     public init(lat: Double = 0.0, lon: Double = 0.0,
@@ -40,7 +32,7 @@ public struct OWMResponse: Identifiable, Decodable {
                 base: String = "", main: Main? = nil, visibility: Int = 0,
                 wind: Wind? = nil, rain: Rain? = nil, snow: Snow? = nil,
                 clouds: Clouds? = nil, dt: Int = 0,
-                sys: Sys? = nil, cityId: Int = 0, name: String = "", cod: Int = 0) {
+                sys: Sys? = nil, id: Int = 0, name: String = "", cod: Int = 0) {
         
         self.coord = Coord(lon: lon, lat: lat)
         self.timezone = timezone
@@ -52,7 +44,7 @@ public struct OWMResponse: Identifiable, Decodable {
         self.clouds = clouds
         self.dt = dt
         self.sys = sys
-        self.cityId = cityId
+        self.id = id
         self.name = name
         self.cod = cod
         self.rain = rain
