@@ -14,17 +14,17 @@ let weatherProvider = OWMProvider(apiKey: "your key")
 ...
 
 // using a binding
-weatherProvider.getWeather(lat: 35.661991, lon: 139.762735, weather: $weather, options: OWMOptions.metric())
+weatherProvider.getWeather(lat: 35.661991, lon: 139.762735, weather: $weather)
 ...
 Text(weather.current?.weatherInfo() ?? "")
 
 // or using the async style, eg with `.task {...}`
-if let results = await weatherProvider.getWeather(lat: 35.661991, lon: 139.762735, options: OWMOptions.metric()) {
+if let results = await weatherProvider.getWeather(lat: 35.661991, lon: 139.762735) {
         weather = results
 }
 
 // or using the callback style, eg with `.onAppear {...}`
-weatherProvider.getWeather(lat: 35.661991, lon: 139.762735, options: OWMOptions.metric()) { response in
+weatherProvider.getWeather(lat: 35.661991, lon: 139.762735) { response in
        if let theWeather = response {
           self.weather = theWeather
        }
@@ -42,10 +42,14 @@ Options available:
 
 -   see [OpenWeather Current Weather Data API](https://openweathermap.org/current) for all the options available.
 
-Create an options object such as this, to retrieve the current weather data:
+Default options in the `getWeather(...)` call, is metric with the current local language.
+
+Create a custom options object such as this, to retrieve the current weather data:
 
 ```swift
 let myOptions = OWMOptions(units: .metric, lang: "en")
+
+weatherProvider.getWeather(lat: 35.661991, lon: 139.762735, weather: $weather, options: myOptions)
 ```
 
 ### Installation

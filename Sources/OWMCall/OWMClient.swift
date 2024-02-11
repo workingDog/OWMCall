@@ -68,8 +68,6 @@ public class OWMClient {
 
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
-            
-   //         print("\n---> response: \(String(data: data, encoding: .utf8) as AnyObject) \n")
 
             guard let httpResponse = response as? HTTPURLResponse else {
                 throw APIError.unknown

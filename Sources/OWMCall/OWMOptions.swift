@@ -45,7 +45,7 @@ public class OWMOptions: OWMOptionsProtocol {
         return stringer
     }
     
-    public static func metric(lang: String = "en") -> OWMOptions {
+    public static func metric(lang: String = Locale.current.language.languageCode?.identifier ?? "en") -> OWMOptions {
         return OWMOptions(units: .metric, lang: lang)
     }
 
