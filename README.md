@@ -9,9 +9,14 @@ The library provides for **current** data through a single function call.
 Weather data from [OpenWeather Current Weather Data API](https://openweathermap.org/api#current) is accessed through the use of a **OWMProvider**, with a single function **getWeather**, eg:
 
 ```swift
-let weatherProvider = OWMProvider(apiKey: "your key")
+let weatherProvider = OWMProvider(apiKey: "your key") // default Current Weather API 2.5
 @State var weather = OWMResponse()
 ...
+
+Alternatively;
+
+let weatherProvider = OWMProvider(apiKey: "your key", urlString: "https://api.openweathermap.org/data/2.5/weather")  
+
 
 // using a binding
 weatherProvider.getWeather(lat: 35.661991, lon: 139.762735, weather: $weather)

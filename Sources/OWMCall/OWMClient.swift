@@ -37,9 +37,10 @@ public class OWMClient {
     let sessionManager: URLSession
     
     let mediaType = "application/json; charset=utf-8"
-    let weatherCallURL = "https://api.openweathermap.org/data/2.5/weather"
-    
-    public init(apiKey: String) {
+    var weatherCallURL = "https://api.openweathermap.org/data/2.5/weather"
+
+    public init(apiKey: String, urlString: String) {
+        self.weatherCallURL = urlString
         self.apiKey = "appid=" + apiKey
         self.sessionManager = {
             let configuration = URLSessionConfiguration.default

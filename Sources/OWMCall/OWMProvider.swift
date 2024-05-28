@@ -16,8 +16,9 @@ open class OWMProvider {
     
     public let client: OWMClient
 
-    public init(apiKey: String) {
-        self.client = OWMClient(apiKey: apiKey)
+    /// default endpoint, Current Weather API 2.5
+    public init(apiKey: String, urlString: String = "https://api.openweathermap.org/data/2.5/weather") {
+        self.client = OWMClient(apiKey: apiKey, urlString: urlString)
     }
     
     /// get the weather at the given location with the given options, results pass back through the weather binding
