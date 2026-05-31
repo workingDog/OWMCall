@@ -1,11 +1,22 @@
 //
 //  OWMOptions.swift
-//  October1
+//  OWMCall
 //
 //  Created by Ringo Wathelet on 2022/10/01.
 //
 
 import Foundation
+
+
+/// convenience
+extension Array where Element == URLQueryItem {
+    
+    mutating func append<T>(name: String, value: T?) {
+        guard let value else { return }
+        append(URLQueryItem(name: name, value: String(describing: value)))
+    }
+    
+}
 
 /*
  * parameters for units, Standard (Kelvin), metric (Celsius), or imperial (Fahrenheit) units
@@ -16,14 +27,11 @@ public enum Units: String {
     case standard
 }
 
-public protocol OWMOptionsProtocol {
-    func toParamString() -> String
-}
-
 /*
  * Options to use for retrieving current weather data
  */
-public class OWMOptions: OWMOptionsProtocol {
+public class OWMOptions {
+    
     private var units: Units?
     private var lang: String?
     
@@ -34,15 +42,17 @@ public class OWMOptions: OWMOptionsProtocol {
  
     public init() { }
     
-    public func toParamString() -> String {
-        var stringer = ""
-        if let wunits = units {
-            stringer += "&units=" + wunits.rawValue
+    public func toQueryItems() -> [URLQueryItem] {
+        var items: [URLQueryItem] = []
+
+        if let units {
+            items.append(name: "units", value: units.rawValue)
         }
-        if let wlang = lang {
-            stringer += "&lang=" + wlang
+        if let lang {
+            items.append(name: "lang", value: lang)
         }
-        return stringer
+       
+        return items
     }
     
     public static func metric(lang: String = Locale.current.language.languageCode?.identifier ?? "en") -> OWMOptions {

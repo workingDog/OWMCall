@@ -1,6 +1,6 @@
 //
 //  OWMResponse.swift
-//  October1
+//  OWMCall
 //
 //  Created by Ringo Wathelet on 2022/10/01.
 //
@@ -10,7 +10,7 @@ import Foundation
 // info from: https://openweathermap.org/current
 
 // MARK: - OWMResponse
-public struct OWMResponse: Identifiable, Decodable {
+public struct OWMResponse: Identifiable, Decodable, Sendable {
     public let coord: Coord
     public let weather: [Weather]?
     public let base: String
@@ -67,16 +67,18 @@ public struct OWMResponse: Identifiable, Decodable {
 }
 
 // MARK: - Clouds
-public struct Clouds: Decodable {
+public struct Clouds: Decodable, Sendable {
     public let all: Int
+    
     public init() {
         self.all = 0
     }
 }
 
 // MARK: - Coord
-public struct Coord: Decodable {
+public struct Coord: Decodable, Sendable {
     public let lon, lat: Double
+    
     public init(lon: Double = 0.0, lat: Double = 0.0) {
         self.lon = lon
         self.lat = lat
@@ -84,7 +86,7 @@ public struct Coord: Decodable {
 }
 
 // MARK: - Main
-public struct Main: Decodable {
+public struct Main: Decodable, Sendable {
     public let temp, feelsLike, tempMin, tempMax: Double
     public let pressure, humidity: Int?
     public let seaLevel, grndLevel: Int?
@@ -111,7 +113,7 @@ public struct Main: Decodable {
 }
 
 // MARK: - Sys
-public struct Sys: Decodable {
+public struct Sys: Decodable, Sendable {
     public let type, id: Int
     public let country: String
     public let sunrise, sunset: Int
@@ -126,7 +128,7 @@ public struct Sys: Decodable {
 }
 
 // MARK: - Weather
-public struct Weather: Identifiable, Decodable {
+public struct Weather: Identifiable, Decodable, Sendable {
     public let id: Int
     public let main, weatherDescription, icon: String
     
@@ -138,7 +140,7 @@ public struct Weather: Identifiable, Decodable {
     }
     
     /// the SFSymbol name to use as the default icon name
-    public static var defaultIcon = "questionmark"
+    public static let defaultIcon = "questionmark"
     
     enum CodingKeys: String, CodingKey {
         case id, main, icon
@@ -147,41 +149,41 @@ public struct Weather: Identifiable, Decodable {
     
     /// return the equivalent SFSymbol name from the weather condition `id` number
     public var iconNameFromId: String {
-        switch id {
-            case 200...232: return "cloud.bolt.rain"
-            case 300...301: return "cloud.rain"
-            case 500...504: return "cloud.heavyrain"
-            case 511: return "cloud.snow"
-            case 520...531: return "cloud.rain"
-            case 600...622: return "cloud.snow"
-            case 701...781: return "cloud.fog"
-            case 800: return "sun.max"
-            case 801: return "cloud.sun"
-            case 802...804: return "cloud"
-        default: return Weather.defaultIcon
+        return switch id {
+            case 200...232: "cloud.bolt.rain"
+            case 300...301: "cloud.rain"
+            case 500...504: "cloud.heavyrain"
+            case 511: "cloud.snow"
+            case 520...531: "cloud.rain"
+            case 600...622: "cloud.snow"
+            case 701...781: "cloud.fog"
+            case 800: "sun.max"
+            case 801: "cloud.sun"
+            case 802...804: "cloud"
+            default: Weather.defaultIcon
         }
     }
     
     /// return the equivalent SFSymbol name from the `icon` name
     public var iconSymbolName: String {
-        switch icon {
-            case "01d","01n": return "sun.max"
-            case "02d","02n": return "cloud.sun"
-            case "03d","03n": return "cloud"
-            case "04d","04n": return "cloud"
-            case "09d","09n": return "cloud.rain"
-            case "10d","10n": return "cloud.heavyrain"
-            case "11d","11n": return "cloud.bolt.rain"
-            case "13d","13n": return "cloud.snow"
-            case "50d","50n": return "cloud.fog"
-        default: return Weather.defaultIcon
+        return switch icon {
+            case "01d","01n": "sun.max"
+            case "02d","02n": "cloud.sun"
+            case "03d","03n": "cloud"
+            case "04d","04n": "cloud"
+            case "09d","09n": "cloud.rain"
+            case "10d","10n": "cloud.heavyrain"
+            case "11d","11n": "cloud.bolt.rain"
+            case "13d","13n": "cloud.snow"
+            case "50d","50n": "cloud.fog"
+            default: Weather.defaultIcon
         }
     }
 
 }
 
 // MARK: - Wind
-public struct Wind: Decodable {
+public struct Wind: Decodable, Sendable {
     public let speed: Double?
     public let deg: Int?
     public let gust: Double?
@@ -195,7 +197,7 @@ public struct Wind: Decodable {
 }
 
 // MARK: - Rain
-public struct Rain: Decodable {
+public struct Rain: Decodable, Sendable {
     public let the1H: Double?
     public let the3H: Double?
     
@@ -222,7 +224,7 @@ public struct Rain: Decodable {
 }
 
 // MARK: - Snow
-public struct Snow: Decodable {
+public struct Snow: Decodable, Sendable {
     public let the1H: Double?
     public let the3H: Double?
     

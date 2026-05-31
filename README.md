@@ -1,12 +1,12 @@
 # Swift OpenWeather Current Weather Data API library
 
-**OWMCall** is a small Swift library to connect to the [OpenWeather Current Weather Data API](https://openweathermap.org/api#current) and retrieve the chosen weather data. Made easy to use with **SwiftUI**.
+**OWMCall** is a small Swift library to connect to the [OpenWeather Current Weather Data API](https://openweathermap.org/api/current?collection=current_forecast) and retrieve the chosen weather data. Made easy to use with **SwiftUI**.
 
 The library provides for **current** data through a single function call.
 
 ### Usage
 
-Weather data from [OpenWeather Current Weather Data API](https://openweathermap.org/api#current) is accessed through the use of a **OWMProvider**, with a single function **getWeather**, eg:
+Weather data from [OpenWeather Current Weather Data API](https://openweathermap.org/api/current?collection=current_forecast) is accessed through the use of a **OWMProvider**, with a single function **getWeather**, eg:
 
 ```swift
 let weatherProvider = OWMProvider(apiKey: "your key") // default Current Weather API 2.5
@@ -27,13 +27,6 @@ Text(weather.current?.weatherInfo() ?? "")
 if let results = await weatherProvider.getWeather(lat: 35.661991, lon: 139.762735) {
         weather = results
 }
-
-// or using the callback style, eg with `.onAppear {...}`
-weatherProvider.getWeather(lat: 35.661991, lon: 139.762735) { response in
-       if let theWeather = response {
-          self.weather = theWeather
-       }
-}
 ```
 
 See the following for example uses:
@@ -45,7 +38,7 @@ See the following for example uses:
 
 Options available:
 
--   see [OpenWeather Current Weather Data API](https://openweathermap.org/current) for all the options available.
+-   see [OpenWeather Current Weather Data API](https://openweathermap.org/api/current?collection=current_forecast) for all the options available.
 
 Default options in the `getWeather(...)` call, is metric with the current local language.
 
@@ -61,7 +54,7 @@ weatherProvider.getWeather(lat: 35.661991, lon: 139.762735, weather: $weather, o
 
 Include the files in the **./Sources/OWMCall** folder into your project or preferably use **Swift Package Manager**.
 
-#### Swift Package Manager  (SPM)
+#### Swift Package Manager (SPM)
 
 Create a Package.swift file for your project and add a dependency to:
 
@@ -84,7 +77,7 @@ import OWMCall
     
 ### References
 
--    [OpenWeather Current Weather Data API](https://openweathermap.org/api#current)
+-    [OpenWeather Current Weather Data API](https://openweathermap.org/api/current?collection=current_forecast)
 
 
 ### Requirement
