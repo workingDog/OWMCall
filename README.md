@@ -19,7 +19,7 @@ let weatherProvider = OWMProvider(apiKey: "your key", urlString: "https://api.op
 
 
 // using a binding
-weatherProvider.getWeather(lat: 35.661991, lon: 139.762735, weather: $weather)
+await weatherProvider.getWeather(lat: 35.661991, lon: 139.762735, weather: $weather)
 ...
 Text(weather.current?.weatherInfo() ?? "")
 
